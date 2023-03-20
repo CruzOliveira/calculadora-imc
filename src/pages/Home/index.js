@@ -1,4 +1,4 @@
-import Formulario from 'Componentes/Formulario';
+import Formulario from 'Componentes/Corpo';
 
 export default function Home() {
   return (
