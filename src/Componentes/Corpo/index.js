@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { Stack, Button, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
@@ -16,7 +15,7 @@ export default function Formulario() {
     const imc = peso / (altura * altura);
     setImc(imc);
   };
-
+  console.log(imc);
   return (
     <Box
       m={10}
