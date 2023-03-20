@@ -1,9 +1,9 @@
-import Corpo from 'Componentes/Corpo';
+import Formulario from 'Componentes/Formulario';
 
 export default function Home() {
   return (
     <div>
-      <Corpo />
+      <Formulario />
     </div>
   );
 }

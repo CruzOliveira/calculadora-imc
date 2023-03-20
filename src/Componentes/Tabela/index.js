@@ -8,12 +8,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Volta from 'Componentes/Botao/Volta';
 
-function createData(name, cpf, idade, dtNacimento, altura, peso, imc) {
-  return { name, cpf, idade, dtNacimento, altura, peso, imc };
-}
-
-const rows = [createData()];
-
 export default function BasicTable() {
   return (
     <TableContainer component={Paper}>
@@ -30,20 +24,13 @@ export default function BasicTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
+          <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            <TableCell component="th" scope="row"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+            <TableCell align="right"></TableCell>
+          </TableRow>
         </TableBody>
       </Table>
       <Volta />
