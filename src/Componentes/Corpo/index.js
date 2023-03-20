@@ -1,6 +1,7 @@
 import { Stack, Button, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Formulario() {
   const [nome, setNome] = useState('');
@@ -10,10 +11,12 @@ export default function Formulario() {
   const [altura, setAltura] = useState([]);
   const [peso, setPeso] = useState([]);
   const [imc, setImc] = useState([]);
+  const navigate = useNavigate();
 
   const calculateImc = () => {
     const imc = peso / (altura * altura);
     setImc(imc);
+    navigate('/tabela');
   };
   console.log(imc);
   return (

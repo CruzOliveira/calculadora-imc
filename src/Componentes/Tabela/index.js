@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, Stack } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function createData(name, cpf, idade, dtNacimento, altura, peso, imc) {
   return { name, cpf, idade, dtNacimento, altura, peso, imc };
@@ -15,6 +16,7 @@ function createData(name, cpf, idade, dtNacimento, altura, peso, imc) {
 const rows = [createData()];
 
 export default function BasicTable() {
+  const navigation = useNavigate();
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -52,7 +54,11 @@ export default function BasicTable() {
         alignItems="center"
         margin={10}
       >
-        <Button variant="contained" size="large">
+        <Button
+          onClick={() => navigation('/')}
+          variant="contained"
+          size="large"
+        >
           Voltar
         </Button>
       </Stack>
