@@ -1,90 +1,118 @@
 import { Stack, Button, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-export default function Formulario() {
-  const [nome, setNome] = useState('');
-  const [cpf, setCpf] = useState('');
-  const [idade, setIdade] = useState('');
-  const [dtNaci, setDtNaci] = useState('');
-  const [altura, setAltura] = useState([]);
-  const [peso, setPeso] = useState([]);
-  const [imc, setImc] = useState([]);
-  const navigate = useNavigate();
-
-  const calculateImc = () => {
-    const imc = peso / (altura * altura);
-    setImc(imc);
-    navigate('/tabela');
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as TodoActions from './store/actions/todos';
+class Formulario extends Component {
+  state = {
+    nome: '',
+    cpf: '',
+    idade: '',
+    dtNaci: '',
+    altura: '',
+    peso: '',
+    imc: '',
   };
-  console.log(imc);
-  return (
-    <Box
-      m={10}
-      component="form"
-      sx={{
-        '& .MuiTextField-root': { m: 2, width: '60ch' },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <Stack direction="row" justifyContent="center" alignItems="center">
-        <TextField
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-          id="outlined-required"
-          label="Nome"
-        />
-        <TextField
-          value={cpf}
-          onChange={(e) => setCpf(e.target.value)}
-          required
-          id="outlined-required"
-          label="CPF"
-        />
-        <TextField
-          value={idade}
-          onChange={(e) => setIdade(e.target.value)}
-          required
-          id="outlined-required"
-          label="Idade"
-        />
-      </Stack>
-      <Stack direction="row" justifyContent="center" alignItems="center">
-        <TextField
-          value={dtNaci}
-          onChange={(e) => setDtNaci(e.target.value)}
-          required
-          id="outlined-required"
-          label="Data de Nacimento"
-        />
-        <TextField
-          value={altura}
-          onChange={(e) => setAltura(e.target.value)}
-          required
-          id="outlined-required"
-          label="Altura"
-        />
-        <TextField
-          value={peso}
-          required
-          onChange={(e) => setPeso(e.target.value)}
-          id="outlined-required"
-          label="Peso"
-        />
-      </Stack>
-      <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
-        margin={10}
+  handleSubmit = (event) => {
+    event.preventDefault();
+
+    this.props.addTodo(this.state.nome);
+    this.props.addTodo(this.state.idade);
+    this.props.addTodo(this.state.dtNaci);
+    this.props.addTodo(this.state.altura);
+    this.props.addTodo(this.state.peso);
+    this.props.addTodo(this.state.imc);
+
+    this.setState({
+      nome: '',
+      cpf: '',
+      idade: '',
+      dtNaci: '',
+      altura: '',
+      peso: '',
+      imc: '',
+    });
+  };
+  render() {
+    return (
+      <Box
+        m={10}
+        component="form"
+        sx={{
+          '& .MuiTextField-root': { m: 2, width: '60ch' },
+        }}
+        noValidate
+        autoComplete="off"
       >
-        <Button onClick={calculateImc} variant="contained" size="large">
-          CALCULAR
-        </Button>
-      </Stack>
-    </Box>
-  );
+        <form onSubmit={this.handleSubmit}>
+          <Stack direction="row" justifyContent="center" alignItems="center">
+            <TextField
+              onChange={(e) => this.setState({ nome: e.target.value })}
+              value={this.state.nome}
+              required
+              id="outlined-required"
+              label="Nome"
+            />
+            <TextField
+              onChange={(e) => this.setState({ cpf: e.target.value })}
+              value={this.state.cpf}
+              required
+              id="outlined-required"
+              label="CPF"
+            />
+            <TextField
+              onChange={(e) => this.setState({ idade: e.target.value })}
+              value={this.state.idade}
+              required
+              id="outlined-required"
+              label="Idade"
+            />
+          </Stack>
+          <Stack direction="row" justifyContent="center" alignItems="center">
+            <TextField
+              onChange={(e) => this.setState({ dtNaci: e.target.value })}
+              value={this.state.dtNaci}
+              required
+              id="outlined-required"
+              label="Data de Nacimento"
+            />
+            <TextField
+              onChange={(e) => this.setState({ altura: e.target.value })}
+              value={this.state.altura}
+              required
+              id="outlined-required"
+              label="Altura"
+            />
+            <TextField
+              onChange={(e) => this.setState({ peso: e.target.value })}
+              value={this.state.peso}
+              required
+              id="outlined-required"
+              label="Peso"
+            />
+          </Stack>
+        </form>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          margin={10}
+        >
+          <Button variant="contained" size="large">
+            CALCULAR
+          </Button>
+        </Stack>
+      </Box>
+    );
+  }
 }
+
+const mapStateToProps = (state) => ({
+  todos: state.todos,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(TodoActions, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Formulario);
