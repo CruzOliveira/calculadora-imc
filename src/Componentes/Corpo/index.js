@@ -3,7 +3,8 @@ import Box from '@mui/material/Box';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as TodoActions from './store/actions/todos';
+import * as TodoActions from '../../store/actions/todos';
+
 class Formulario extends Component {
   state = {
     nome: '',
