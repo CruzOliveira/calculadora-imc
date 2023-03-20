@@ -1,5 +1,6 @@
-import { Stack, Button, TextField } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import Box from '@mui/material/Box';
+import Botao from 'Componentes/Botao/Calcular';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -93,17 +94,8 @@ class Formulario extends Component {
               label="Peso"
             />
           </Stack>
+          <Botao />
         </form>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          margin={10}
-        >
-          <Button variant="contained" size="large">
-            CALCULAR
-          </Button>
-        </Stack>
       </Box>
     );
   }
